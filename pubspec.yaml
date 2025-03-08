@@ -30,6 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  video_player:
   flutter_webrtc: ^0.9.28
   http: ^0.13.3
 
