@@ -127,7 +127,7 @@ class _VideoPlayerScreenState extends State<HomePage> {
           setState(() {
             // If the video is playing, pause it.
             if (_controller.value.isPlaying) {
-              _controller.play();
+              _controller.pause();
             } else {
               // If the video is paused, play it.
               _controller.play();
