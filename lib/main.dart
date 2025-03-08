@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hacktj_25_front_end/pages/home_page.dart';
+import 'package:hacktj_25_front_end/pages/login_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Security Camera",
-      home: HomePage(),
+      home: LoginPage(),
       debugShowCheckedModeBanner: false,
       routes: {
         '/homePage': (context) => HomePage(),
