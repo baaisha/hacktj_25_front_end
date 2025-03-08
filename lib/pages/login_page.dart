@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hacktj_25_front_end/components/login_button.dart';
-import 'package:hacktj_25_front_end/components/login_decoration.dart';
-import 'package:hacktj_25_front_end/components/password_field.dart';
-import 'package:hacktj_25_front_end/components/username_field.dart';
+import 'package:hacktj_25_front_end/components/login_components/login_button.dart';
+import 'package:hacktj_25_front_end/components/login_components/login_decoration.dart';
+import 'package:hacktj_25_front_end/components/login_components/password_field.dart';
+import 'package:hacktj_25_front_end/components/login_components/username_field.dart';
 import 'package:hacktj_25_front_end/constants.dart';
 
 class LoginPage extends StatelessWidget {
