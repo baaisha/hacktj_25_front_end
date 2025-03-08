@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Security Camera",
-      home: StreamPage(),
+      home: LoginPage(),
       debugShowCheckedModeBanner: false,
       routes: {
         '/homePage': (context) => HomePage(),
