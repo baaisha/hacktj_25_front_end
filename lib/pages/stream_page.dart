@@ -18,7 +18,7 @@ class _StreamPageState extends State<StreamPage> {
       body: Center(
         child: Mjpeg(
           isLive: true,
-          stream: 'http://10.0.2.2:5001/video_feed',
+          stream: 'http://10.180.8.138:5001/video_feed', // 10.0.2.2 for simulator
         ),
       ),
     );
