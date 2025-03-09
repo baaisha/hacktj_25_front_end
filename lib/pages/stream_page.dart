@@ -40,7 +40,6 @@ class _StreamPageState extends State<StreamPage> {
     socket?.dispose();
     super.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,6 +88,13 @@ class _StreamPageState extends State<StreamPage> {
           ),
           const SizedBox(height: 200),
         ],
+        title: Text('Camera Stream'),
+      ),
+      body: Center(
+        child: Mjpeg(
+          isLive: true,
+          stream: 'http://10.0.2.2:5001/video_feed',
+        ),
       ),
     );
   }
