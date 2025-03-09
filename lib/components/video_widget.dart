@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hacktj_25_front_end/pages/home_page.dart';
+//import 'package:hacktj_25_front_end/pages/home_page.dart';
 import 'package:video_player/video_player.dart';
 
 
@@ -7,7 +7,7 @@ class VideoWidget extends StatefulWidget {
   
   final String path;
 
-  VideoWidget({
+  const VideoWidget({
     super.key,
     required this.path,
   });
@@ -25,11 +25,8 @@ class _VideoWidgetState extends State<VideoWidget> {
     super.dispose();
   }
 
-  late final VideoPlayerController _controller = VideoPlayerController.networkUrl(
-    Uri.parse(
-      widget.path,
-      //'C:\\Users\\jaspe.MSI\\Documents\\GithubLocal\\hacktj_25_front_end\\debug_video.mp4',
-    ),
+  late final VideoPlayerController _controller = VideoPlayerController.asset(
+    'asset\\debug_video2.mp4'
   );
 
   late final Future<void> _initializeVideoPlayerFuture = _controller.initialize();
