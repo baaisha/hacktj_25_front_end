@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pubspec_runtime/pubspec_runtime.dart';
 //import 'package:flutter/rendering.dart';
 import 'package:hacktj_25_front_end/components/video_widget.dart';
 //import 'package:video_player/video_player.dart';
@@ -27,6 +28,11 @@ class _HomePageState extends State<HomePage> {
               header: 'EVENT: SOMETHING HAPPENED',
               description: 'Cool this should ACTIVATE.',
             ),
+            Popup(
+              videoPath: 'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+              header: 'EVENT: SOMETHING HAPPENED',
+              description: 'Cool this should ACTIVATE.',
+            ),
           ],
         ),
       ),
@@ -41,7 +47,9 @@ class Popup extends StatelessWidget {
   final String header;
   final String description;
 
-  const Popup({
+  var pubspecEditor = PubspecEditor();
+
+  Popup({
     super.key,
     required this.videoPath,
     required this.header,
@@ -50,6 +58,8 @@ class Popup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    pubspecEditor.save();
+    runPubGet();
     return Container(
       height:200,
       decoration: BoxDecoration(
