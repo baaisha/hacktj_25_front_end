@@ -12,3 +12,9 @@ Function()? goToHomePage(BuildContext context) {
     Navigator.pushNamed(context, '/homePage');
   };
 }
+
+Function()? goToStreamPage(BuildContext context) {
+  return () {
+    Navigator.pushNamed(context, '/streamPage');
+  };
+}

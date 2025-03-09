@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mjpeg/flutter_mjpeg.dart';
+import 'package:hacktj_25_front_end/components/noti_service.dart';
 import 'package:hacktj_25_front_end/constants.dart';
 
 class StreamPage extends StatefulWidget {
@@ -45,7 +46,10 @@ class _StreamPageState extends State<StreamPage> {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15), color: bluePrimary),
               child: TextButton(
-                onPressed: null,
+                onPressed: () {
+                  NotiService().showNotification(
+                      title: "Hello!!!", body: "Helo!! my friendy!");
+                },
                 style:
                     ButtonStyle(backgroundColor: WidgetStateColor.transparent),
                 child: Text(
