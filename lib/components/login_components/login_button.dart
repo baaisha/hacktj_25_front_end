@@ -14,7 +14,7 @@ class LoginButton extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30), color: orangePrimary),
         child: TextButton(
-          onPressed: goToHomePage(context),
+          onPressed: goToStreamPage(context),
           style: ButtonStyle(backgroundColor: WidgetStateColor.transparent),
           child: Text(
             "Login",
@@ -24,6 +24,5 @@ class LoginButton extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }
