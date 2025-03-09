@@ -10,54 +10,33 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    // FocusNodes for controlling focus behavior
+    final FocusNode usernameFocusNode = FocusNode();
+    final FocusNode passwordFocusNode = FocusNode();
+
+    return Scaffold(
+      resizeToAvoidBottomInset:
+          true, // This will resize the body when the keyboard is open
       backgroundColor: background,
-      body: Column(
-        children: [
-          LoginDecoration(),
-          SizedBox(height: 20),
-          UsernameField(),
-          PasswordField(),
-          Padding(
-            padding: const EdgeInsets.only(left: 25, right: 25),
-            child: Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                "Forgot Password?",
-                textAlign: TextAlign.right,
-                style: TextStyle(
-                  fontSize: 11,
-                  fontWeight: FontWeight.bold,
-                  color: orangePrimary,
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          LoginButton(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+      body: SingleChildScrollView(
+        // Make the content scrollable
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.manual,
+        child: Padding(
+          padding: EdgeInsets.all(20),
+          child: Column(
             children: [
-              Text(
-                "Dont have an account?",
-                textAlign: TextAlign.right,
-                style: TextStyle(
-                  fontSize: 11,
-                  fontWeight: FontWeight.bold,
-                  color: idcText,
-                ),
-              ),
+              LoginDecoration(),
+              SizedBox(height: 20),
+              UsernameField(), // Username with focus node
+              PasswordField(), // Password with focus node
               Padding(
-                padding: const EdgeInsets.only(left: 3.0),
-                child: InkWell(
+                padding: EdgeInsets.only(left: 25, right: 25),
+                child: Align(
+                  alignment: Alignment.centerRight,
                   child: Text(
-                    "Sign Up",
+                    "Forgot Password?",
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      decorationColor: orangePrimary,
                       fontSize: 11,
                       fontWeight: FontWeight.bold,
                       color: orangePrimary,
@@ -65,9 +44,41 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
               ),
+              SizedBox(height: 30),
+              LoginButton(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Don't have an account?",
+                    textAlign: TextAlign.right,
+                    style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
+                      color: idcText,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 3.0),
+                    child: InkWell(
+                      child: Text(
+                        "Sign Up",
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          decorationColor: orangePrimary,
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold,
+                          color: orangePrimary,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }
