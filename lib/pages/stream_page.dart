@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mjpeg/flutter_mjpeg.dart';
-import 'package:hacktj_25_front_end/components/noti_service.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:hacktj_25_front_end/constants.dart';
 
 class StreamPage extends StatefulWidget {
@@ -11,12 +11,42 @@ class StreamPage extends StatefulWidget {
 }
 
 class _StreamPageState extends State<StreamPage> {
+  IO.Socket? socket;
+  String notificationText = "Waiting for notifications...";
+
+  @override
+  void initState() {
+    super.initState();
+    // Establish socket connection
+    socket = IO.io('http://10.180.8.138:5001', <String, dynamic>{
+      'transports': ['websocket'],
+    });
+
+    // Set up socket listeners
+    socket?.on('connect', (_) {
+      print('Connected to Flask server');
+    });
+
+    socket?.on('new_notification', (data) {
+      print('Received notification: $data');
+      setState(() {
+        notificationText = "${data['title']}: ${data['body']}";
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    socket?.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: orangeSecondary,
-        title: Text(
+        title: const Text(
           "Live Stream",
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
@@ -24,9 +54,7 @@ class _StreamPageState extends State<StreamPage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          SizedBox(
-            height: 50,
-          ),
+          const SizedBox(height: 50),
           Center(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -39,47 +67,27 @@ class _StreamPageState extends State<StreamPage> {
                     );
                   } catch (e) {
                     print("Error loading stream: $e");
-                    return Text("Error loading stream");
+                    return const Text("Error loading stream");
                   }
                 }),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return snapshot.data!;
                   } else {
-                    return CircularProgressIndicator(); // Or a loading indicator
+                    return const CircularProgressIndicator();
                   }
                 },
               ),
             ),
           ),
           Padding(
-            padding:
-                const EdgeInsets.only(left: 22, right: 22, bottom: 5, top: 35),
-            child: Container(
-              width: 500,
-              height: 45,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15), color: bluePrimary),
-              child: TextButton(
-                onPressed: () {
-                  NotiService().showNotification(
-                      title: "Hello!!!", body: "Helo!! my friendy!");
-                },
-                style:
-                    ButtonStyle(backgroundColor: WidgetStateColor.transparent),
-                child: Text(
-                  "Pause",
-                  style: TextStyle(
-                      color: background,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600),
-                ),
-              ),
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              notificationText,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
           ),
-          SizedBox(
-            height: 200,
-          ),
+          const SizedBox(height: 200),
         ],
       ),
     );
