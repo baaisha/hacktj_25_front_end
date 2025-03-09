@@ -30,10 +30,25 @@ class _StreamPageState extends State<StreamPage> {
           Center(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Mjpeg(
-                isLive: true,
-                stream:
-                    'http://10.180.8.138:5001/video_feed', // 10.0.2.2 for simulator
+              child: FutureBuilder(
+                future: Future.delayed(Duration.zero, () async {
+                  try {
+                    return Mjpeg(
+                      isLive: true,
+                      stream: 'http://10.180.8.138:5002/video_feed',
+                    );
+                  } catch (e) {
+                    print("Error loading stream: $e");
+                    return Text("Error loading stream");
+                  }
+                }),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return snapshot.data!;
+                  } else {
+                    return CircularProgressIndicator(); // Or a loading indicator
+                  }
+                },
               ),
             ),
           ),
